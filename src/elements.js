@@ -1,0 +1,20 @@
+export const createSortList = document.getElementById('create-sort-list')
+export const sorting = document.getElementById('sorting')
+export const sortResult = document.getElementById('sort-result')
+
+export const form = document.querySelector('#create-sort-list form')
+export const submit = document.querySelector('#create-sort-list form button')
+export const input = document.getElementById('input-sort-item')
+export const sortList = document.getElementById('sort-list')
+export const alertMessage = document.getElementById('alert-message')
+export const startSort = document.getElementById('start-sort')
+
+export const firstSortBox = document.getElementById('first-sort-box')
+export const secondSortBox = document.getElementById('second-sort-box')
+export const middleFirstBox = document.getElementById('middle-first-box')
+export const middleSecondBox = document.getElementById('middle-second-box')
+
+export const sortResultText = document.querySelector('#sort-result strong')
+export const resultList = document.getElementById('result-list')
+export const btnBackWrapper = document.getElementById('btn-back-wrapper')
+export const btnBack = document.getElementById('btn-back')

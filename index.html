@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnyRanks</title>
+
+  <!-- Atkinson Hyperlegible -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+
+  <script src="./src/main.js" type="module" defer></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <div id="main-box">
+        <div id="create-sort-list">
+          <h1>AnyRanks</h1>
+
+          <h2>Type a character or something you want to add to make the rank list!😎</h2>
+          <p>Press Enter or + button to add to list!👍</p>
+
+          <p id="alert-message">
+
+          </p>
+
+          <form>
+            <input type="text" name="sort-item" id="input-sort-item" />
+            <button type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+              </svg>
+            </button>
+          </form>
+
+          <div id="sort-list-wrapper">
+            <h3>- Sort list -</h3>
+            <ul id="sort-list">
+
+            </ul>
+          </div>
+
+          <div id="start-sort">
+
+          </div>
+        </div>
+
+        <div id="sorting">
+          <div id="first-sort-box">
+            <p>lorem ipsum 1</p>
+          </div>
+
+          <div id="middle-box">
+            <div id="middle-first-box">
+              I like both!
+            </div>
+
+            <div id="middle-second-box">
+              Go back to last choice!
+            </div>
+          </div>
+
+          <div id="second-sort-box">
+            <p>lorem ipsum 2</p>
+          </div>
+        </div>
+
+        <div id="sort-result">
+          <strong></strong>
+
+          <ul id="result-list">
+
+          </ul>
+
+          <div id="btn-back-wrapper">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

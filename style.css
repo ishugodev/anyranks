@@ -1,0 +1,302 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --bg-color: #ffffff;
+  --input-bg-color: #ffffff;
+  --txt-color: #1b1b1b;
+  --stk-color: #5b5b5b;
+  --btn-color: #585858;
+  --btn-hover-color: #3b3b3b;
+  --btn-cancel-hover-color: #e35050;
+  --list-hover-color: #cecece;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+body,
+input,
+button {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+#app {
+  color: var(--txt-color);
+}
+
+.container {
+  padding: 2.4rem;
+}
+
+#main-box {
+  padding: 1.6rem;
+
+  border: 2px solid var(--stk-color);
+  border-radius: 1rem;
+
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+h1 {
+  font-size: 4.8rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+#create-sort-list {
+  /* display: grid */
+  display: grid;
+  gap: 1.6rem;
+}
+
+#alert-message {
+  color: var(--btn-cancel-hover-color);
+  font-weight: 700;
+}
+
+#create-sort-list form {
+  display: flex;
+}
+
+#create-sort-list input {
+  border: 1px solid var(--stk-color);
+  border-radius: 0.6rem 0 0 0.6rem;
+
+  width: 100%;
+
+  padding: 0.8rem;
+}
+
+#create-sort-list input:focus {
+  outline: 1px solid black;
+}
+
+#create-sort-list button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3.2rem;
+
+  background: var(--btn-color);
+
+  transition: 0.15s;
+
+  border: none;
+  border-radius: 0 0.6rem 0.6rem 0;
+}
+
+#create-sort-list button:hover {
+  background: var(--btn-hover-color);
+}
+
+#create-sort-list button svg {
+  color: var(--bg-color);
+
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+#sort-list-wrapper h3 {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+#sort-list-wrapper ul {
+  display: grid;
+
+  list-style: none;
+
+  margin-top: 1rem;
+}
+
+#sort-list-wrapper li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 100%;
+
+  padding: 1.2rem;
+
+  border-radius: 1rem;
+
+  transition: background 0.15s;
+}
+
+#sort-list-wrapper li:hover {
+  background: var(--list-hover-color);
+}
+
+#sort-list-wrapper p {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#sort-list-wrapper li button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 2.4rem;
+  height: 2.4rem;
+
+  border: none;
+  border-radius: 50%;
+
+  background: var(--btn-color);
+  color: var(--bg-color);
+
+  transition: background 0.15s;
+}
+
+#sort-list-wrapper li button:hover {
+  background: var(--btn-cancel-hover-color);
+}
+
+#sort-list-wrapper button svg {
+  width: 2rem;
+  height: 2rem;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+#start-sort button {
+  background: var(--btn-color);
+  color: var(--bg-color);
+
+  font-weight: 700;
+  font-size: 1.6rem;
+
+  border: none;
+  border-radius: 1rem;
+
+  transition: background 0.15s;
+
+  width: auto;
+  margin: auto;
+
+  padding: 1.6rem;
+}
+
+#start-sort button:hover {
+  background: var(--btn-hover-color);
+}
+
+#sorting {
+  /*display: grid;*/
+  display: none;
+  gap: 1.6rem;
+}
+
+#first-sort-box,
+#middle-first-box,
+#middle-second-box,
+#second-sort-box {
+  cursor: pointer;
+}
+
+#sorting #first-sort-box,
+#sorting #second-sort-box {
+  border: 2px solid var(--stk-color);
+  border-radius: 0.5rem;
+
+  height: calc(100vh / 3);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+#sorting #middle-box {
+  display: flex;
+  gap: 1.6rem;
+
+  height: 15vh;
+}
+
+#sorting #middle-box > * {
+  border: 2px solid var(--stk-color);
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+#sort-result {
+  /* display:grid; */
+  display: none;
+}
+
+#sort-result strong {
+  font-size: 3.2rem;
+  font-weight: 700;
+
+  margin-inline: auto;
+  margin-bottom: 3rem;
+}
+
+#sort-result #result-list {
+  display: grid;
+  gap: 1rem;
+
+  list-style: none;
+  font-size: 2.4rem;
+}
+
+#sort-result #result-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+#sort-result #result-list span {
+  width: 10%;
+}
+
+#sort-result #result-list p {
+  width: 90%;
+}
+
+#sort-result #result-list hr {
+  border: none;
+  border-bottom: 1px solid var(--stk-color);
+}
+
+#sort-result #btn-back-wrapper {
+  margin-inline: auto;
+  margin-top: 1.6rem;
+}
+
+#sort-result #btn-back-wrapper button {
+  background: var(--btn-color);
+  color: var(--bg-color);
+
+  font-size: 2rem;
+
+  border: none;
+  border-radius: 1rem;
+
+  padding: 1.6rem;
+}
