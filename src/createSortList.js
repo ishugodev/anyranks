@@ -50,11 +50,11 @@ export function updateSortList() {
     return
   }
 
-  sortList.forEach(index => {
+  for(let i = sortList.length; i > 0; i--) {
     elements.sortList.innerHTML += `
     <li>
-      ${index.name}
-      <button id="${index.idName}">
+      ${sortList[i - 1].name}
+      <button id="${sortList[i - 1].idName}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
           viewBox="0 0 16 16">
           <path
@@ -63,7 +63,7 @@ export function updateSortList() {
       </button>
     </li>
     `
-  })
+  }
 
   if(sortList.length >= 2) {
     elements.startSort.innerHTML = '<button id="btn-start-sort">Start sort!🤩</button>'
