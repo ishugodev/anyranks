@@ -1,0 +1,124 @@
+.sort-container {
+  padding: 1rem;
+
+  strong {
+    font-size: 2rem;
+  }
+
+  .sort {
+    .el-button {
+      color: hsl(0, 0%, 5%) !important;
+      background-color: transparent !important;
+  
+      padding: 2rem !important;
+  
+      border-radius: 1rem;
+    }
+  
+    .el-button:hover {
+      background-color: hsl(0, 0%, 95%) !important;
+    }
+  
+    .controls {
+      display: grid;
+      gap: 1rem;
+    }
+  
+    .choices {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .el-button.choice {
+      flex: 1;
+      border: 1px solid hsl(0, 0%, 25%) !important;
+    }
+  
+    .extra-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .extra-actions .el-button {
+      flex: 1;
+      border: 1px solid hsl(0, 0%, 25%) !important;
+      margin: 0;
+    }
+  
+    .progress-bar {
+      position: relative;
+      width: 100%;
+      height: 2rem;
+      background: #ddd;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-top: 1.5rem;
+  
+      .progress {
+        height: 100%;
+        background: #42b983;
+        transition: width 0.3s ease;
+      }
+  
+      p {
+        position: absolute;
+        top: -30%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  .result {
+    strong {
+      display: block;
+      text-align: center;
+    }
+
+    ul {
+      display: grid;
+      gap: 0.5rem;
+
+      padding: 0;
+
+      font-size: 1.5rem;
+    }
+
+    ul li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+
+      list-style: none;
+
+      .index {
+        width: 1.5rem;
+      }
+
+      .item {
+        flex: 1;
+      }
+    }
+
+    .button-wrapper {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .el-button {
+      font-size: 1.25rem;
+
+      padding: 2rem !important;
+      margin: 0 !important;
+
+      flex: 1;
+  
+      border-radius: 1rem;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+@use "pages/home";
+@use "pages/sort";
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body * {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+.el-input__wrapper {
+  font-size: 1rem;
+  padding: 0 !important;
+  box-shadow: 0 0 0 1px hsl(0, 0%, 40%) inset !important;
+}
+
+.el-input__inner {
+  color: hsl(0, 0%, 5%) !important;
+}
+
+.el-input__inner::placeholder {
+  color: hsl(0, 0%, 40%) !important;
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px hsl(0, 0%, 5%) inset !important;
+}
+
+.el-button {
+  padding: 0 !important;
+  min-width: 2rem;
+  background-color: hsl(0, 0%, 30%) !important;;
+  color: hsl(0, 0%, 100%) !important;
+  border: none !important;
+  outline: none !important;
+  transition: all 0.15s ease-in-out !important;
+}
+
+.el-button:hover {
+  background-color: hsl(0, 0%, 20%) !important;
+  border-color: none;
+}
+
+.el-button:active {
+  background-color: hsl(0, 0%, 30%) !important;
+  border-color: hsl(0, 0%, 50%) !important;
+}
+
+.el-button.danger:hover {
+  background-color: hsl(0, 77%, 59%) !important;
+}

@@ -1,0 +1,62 @@
+.home-container {
+  padding: 1rem;
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .alert-messages {
+    color: hsl(0, 72%, 60%);
+    font-weight: 700;
+  }
+
+  .input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .input-wrapper .el-input__inner {
+    flex: 1;
+    padding: 0.5rem;
+  }
+
+  .div-align-center {
+    text-align: center;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.5rem;
+
+    border-radius: 0.5rem;
+
+    list-style: none;
+    word-break: break-all;
+
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: hsl(0, 0%, 90%);
+    }
+  }
+
+  .el-button.sort-button {
+    font-size: 1rem;
+    font-weight: 700;
+
+    padding: 1.5rem !important;
+
+    border-radius: 1rem;
+  }
+}
+
