@@ -1,6 +1,6 @@
 <template>
   <div class="sort-container">
-    <div class="sort" v-if="pair">
+    <div v-if="pair" class="sort">
       <strong>Sorting Time!⚡</strong>
       <p>Which one do you prefer?</p>
 
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="result" v-else>
+    <div v-else class="result">
       <strong>Ranking🏆</strong>
       <ul>
         <li v-for="(item, index) in rankedCompetitiveTies" :key="index">
@@ -46,6 +46,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
+
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -53,6 +54,11 @@ const router = useRouter();
 interface RankItem {
   text: string;
   score: number;
+}
+
+interface StoredData {
+  temp_items: { text: string }[];
+  result?: { rank: number; text: string; score: number }[];
 }
 
 const items = ref<RankItem[]>([]);
@@ -73,30 +79,30 @@ const pair = computed<[RankItem, RankItem] | undefined>(
 const canGoBack = computed(() => history.value.length > 0);
 
 const rankedCompetitiveTies = computed(() => {
-  const sorted = [...items.value].sort((a, b) => b.score - a.score)
-  const result: { rank: number; text: string; score: number }[] = []
+  const sorted = [...items.value].sort((a, b) => b.score - a.score);
+  const result: { rank: number; text: string; score: number }[] = [];
 
-  let currentRank = 1
-  let prevScore: number | null = null
-  let itemsProcessed = 0
+  let currentRank = 1;
+  let prevScore: number | null = null;
+  let itemsProcessed = 0;
 
   for (const current of sorted) {
-    itemsProcessed++
+    itemsProcessed++;
 
     if (prevScore !== null && current.score < prevScore) {
-      currentRank = itemsProcessed
+      currentRank = itemsProcessed;
     }
 
     result.push({
       rank: currentRank,
       text: current.text,
       score: current.score,
-    })
+    });
 
-    prevScore = current.score
+    prevScore = current.score;
   }
 
-  return result
+  return result;
 });
 
 onMounted(() => {
@@ -104,10 +110,10 @@ onMounted(() => {
     const stored = localStorage.getItem("@anyranks");
     if (!stored) return router.push("/");
 
-    const data = JSON.parse(stored);
+    const data: StoredData = JSON.parse(stored);
     if (!data.temp_items || !data.temp_items.length) return router.push("/");
 
-    items.value = data.temp_items.map((index: any) => ({
+    items.value = data.temp_items.map((index) => ({
       text: index.text,
       score: 0,
     }));
@@ -132,7 +138,7 @@ function generateComparisons(arr: RankItem[]) {
 function choose(selected: RankItem) {
   const pair = comparisons.value[currentIndex.value];
   if (!pair) return;
-  const [a, b] = pair;
+  // const [a, b] = pair;
   selected.score += 1;
   history.value.push(currentIndex.value);
   nextComparison();

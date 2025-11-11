@@ -17,9 +17,9 @@
       <el-input
         ref="inputRef"
         v-model="newItem"
-        @keyup.enter="addItem"
         type="text"
         placeholder="Add item"
+        @keyup.enter="addItem"
       />
       <el-button :icon="Plus" @click="addItem" />
     </div>
@@ -37,10 +37,10 @@
       </li>
     </ul>
 
-    <p class="div-align-center" v-else>No list yet!😪</p>
+    <p v-else class="div-align-center">No list yet!😪</p>
 
     <div class="div-align-center">
-      <el-button class="sort-button" v-if="canSort" @click="startSort"
+      <el-button  v-if="canSort" class="sort-button" @click="startSort"
         >Start sort!🤩</el-button
       >
     </div>
@@ -48,9 +48,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
+
 import { Plus, Close } from "@element-plus/icons-vue";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
