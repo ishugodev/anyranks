@@ -6,8 +6,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --fix",
+    "test": "vitest",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -21,14 +21,20 @@
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.1.4",
+    "@nuxt/test-utils": "^3.20.1",
     "@nuxtjs/style-resources": "^1.2.2",
     "@types/node": "^24.9.2",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/test-utils": "^2.4.6",
     "element-plus": "^2.11.5",
     "eslint": "^9.39.1",
+    "happy-dom": "^20.0.10",
     "node-sass": "^9.0.0",
+    "playwright-core": "^1.56.1",
     "sass": "^1.93.2",
     "sass-loader": "^16.0.6",
     "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.10"
   }
 }

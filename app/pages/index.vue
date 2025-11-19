@@ -17,11 +17,12 @@
       <el-input
         ref="inputRef"
         v-model="newItem"
+        data-test="input-main"
         type="text"
         placeholder="Add item"
         @keyup.enter="addItem"
       />
-      <el-button :icon="Plus" @click="addItem" />
+      <el-button data-test="add-item-button" :icon="Plus" @click="addItem" />
     </div>
 
     <p class="div-align-center">Sort list</p>
@@ -29,6 +30,7 @@
       <li v-for="(item, index) in items" :key="index">
         <span>{{ item.text }}</span>
         <el-button
+          data-test="remove-item-button"
           class="danger"
           :icon="Close"
           circle
@@ -40,7 +42,7 @@
     <p v-else class="div-align-center">No list yet!😪</p>
 
     <div class="div-align-center">
-      <el-button  v-if="canSort" class="sort-button" @click="startSort"
+      <el-button v-if="canSort" class="sort-button" @click="startSort"
         >Start sort!🤩</el-button
       >
     </div>

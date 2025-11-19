@@ -1,8 +1,8 @@
 name: CI
 on: [push]
 jobs:
-  eslint:
-    name: Lint code base
+  standard-checks:
+    name: Lint and test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,3 +22,6 @@ jobs:
 
       - name: Run eslint
         run: pnpm lint
+
+      - name: Run tests
+        run: pnpm test
