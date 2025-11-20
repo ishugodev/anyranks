@@ -6,8 +6,9 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "lint": "eslint . --fix",
+    "lint": "eslint ./app --fix",
     "test": "vitest",
+    "lhci": "lhci autorun",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.1.4",
+    "@lhci/cli": "^0.15.1",
     "@nuxt/test-utils": "^3.20.1",
     "@nuxtjs/style-resources": "^1.2.2",
     "@types/node": "^24.9.2",
