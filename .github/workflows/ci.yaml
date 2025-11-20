@@ -28,6 +28,8 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-      - name: Lighthouse CI
+      - name: Generate build
         run: pnpm generate
+
+      - name: Lighthouse CI
         run: pnpm lhci
