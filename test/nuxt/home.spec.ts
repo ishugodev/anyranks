@@ -102,7 +102,7 @@ describe("Home page", () => {
     const sortButton = wrapper.find(".sort-button");
     await sortButton.trigger("click");
 
-    const stored = JSON.parse(localStorage.getItem("@anyranks"));
+    const stored = JSON.parse(localStorage.getItem("@anyranks") || "{}");
 
     expect(stored.temp_items.length).toBe(2);
     expect(push).toHaveBeenCalledWith("/sort");
@@ -116,7 +116,7 @@ describe("Home page", () => {
 
     await mountSuspended(Home);
 
-    const stored = JSON.parse(localStorage.getItem("@anyranks"));
+    const stored = JSON.parse(localStorage.getItem("@anyranks") || "{}");
 
     expect(stored.temp_items).toEqual([]);
   });
