@@ -1,5 +1,6 @@
 .home-container {
   padding: 1rem;
+  min-height: 100lvh;
 
   h1 {
     font-size: 2rem;
@@ -13,13 +14,21 @@
 
   .input-wrapper {
     display: flex;
-    gap: 0.5rem;
     width: 100%;
   }
 
-  .input-wrapper .el-input__inner {
+  .input-wrapper [data-test="input-main"] {
     flex: 1;
     padding: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  .input-wrapper button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 0 0.5rem 0.5rem 0;
   }
 
   .div-align-center {
@@ -50,7 +59,7 @@
     }
   }
 
-  .el-button.sort-button {
+  .sort-button {
     font-size: 1rem;
     font-weight: 700;
 

@@ -6,17 +6,17 @@
   }
 
   .sort {
-    .el-button {
-      color: hsl(0, 0%, 5%) !important;
-      background-color: transparent !important;
+    button {
+      color: hsl(0, 0%, 5%);
+      background-color: transparent;
   
-      padding: 2rem !important;
+      padding: 2rem;
   
       border-radius: 1rem;
     }
   
-    .el-button:hover {
-      background-color: hsl(0, 0%, 95%) !important;
+    button:hover {
+      background-color: hsl(0, 0%, 95%);
     }
   
     .controls {
@@ -31,9 +31,9 @@
       gap: 1rem;
     }
   
-    .el-button.choice {
+    .choice {
       flex: 1;
-      border: 1px solid hsl(0, 0%, 25%) !important;
+      border: 1px solid hsl(0, 0%, 25%);
     }
   
     .extra-actions {
@@ -43,9 +43,9 @@
       gap: 1rem;
     }
     
-    .extra-actions .el-button {
+    .extra-actions button {
       flex: 1;
-      border: 1px solid hsl(0, 0%, 25%) !important;
+      border: 1px solid hsl(0, 0%, 25%);
       margin: 0;
     }
   
@@ -110,11 +110,11 @@
       gap: 1rem;
     }
 
-    .el-button {
+    button {
       font-size: 1.25rem;
 
-      padding: 2rem !important;
-      margin: 0 !important;
+      padding: 2rem;
+      margin: 0;
 
       flex: 1;
   

@@ -14,7 +14,7 @@
     </div>
 
     <div class="input-wrapper">
-      <el-input
+      <input
         ref="inputRef"
         v-model="newItem"
         data-test="input-main"
@@ -22,37 +22,44 @@
         placeholder="Add item"
         @keyup.enter="addItem"
       />
-      <el-button data-test="add-item-button" :icon="Plus" @click="addItem" />
+      <button
+        data-test="add-item-button"
+        aria-label="Add item"
+        @click="addItem"
+      >
+        +
+      </button>
     </div>
 
     <p class="div-align-center">Sort list</p>
     <ul v-if="items.length > 0">
-      <li v-for="(item, index) in items" :key="index">
-        <span>{{ item.text }}</span>
-        <el-button
+      <li
+        v-for="(item, index) in items.length ? items : placeholderList"
+        :key="index"
+      >
+        <span>{{ item.text || "\u00A0" }}</span>
+        <button
           data-test="remove-item-button"
           class="danger"
-          :icon="Close"
-          circle
+          aria-label="Remove item"
           @click="removeItem(index)"
-        />
+        ></button>
       </li>
     </ul>
 
     <p v-else class="div-align-center">No list yet!😪</p>
 
     <div class="div-align-center">
-      <el-button v-if="canSort" class="sort-button" @click="startSort"
-        >Start sort!🤩</el-button
-      >
+      <button v-if="canSort" class="sort-button" @click="startSort">
+        Start sort!🤩
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
-import { Plus, Close } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -63,6 +70,8 @@ const inputRef = ref<HTMLInputElement | null>(null);
 const showErrorInputNull = ref(false);
 const showErrorSameNameItems = ref(false);
 const canSort = ref(false);
+
+const placeholderList = Array(5).fill(null);
 
 onMounted(() => {
   const stored = localStorage.getItem("@anyranks");

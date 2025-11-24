@@ -8,11 +8,6 @@ vi.mock("vue-router", () => ({
   useRouter: () => ({ push }),
 }));
 
-vi.mock("element-plus", () => ({
-  ElInput: { template: "<input v-bind='$attrs' />" },
-  ElButton: { template: "<button v-bind='$attrs'><slot /></button>" },
-}));
-
 const localStorageMock = () => {
   let store: Record<string, string> = {};
 

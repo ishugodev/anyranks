@@ -6,23 +6,23 @@
 
       <div class="controls">
         <div class="choices">
-          <el-button class="choice" @click="choose(pair[0])">
+          <button class="choice" @click="choose(pair[0])">
             {{ pair[0].text }}
-          </el-button>
+          </button>
           <span>VS</span>
-          <el-button class="choice" @click="choose(pair[1])">
+          <button class="choice" @click="choose(pair[1])">
             {{ pair[1].text }}
-          </el-button>
+          </button>
         </div>
 
         <div class="extra-actions">
-          <el-button @click="likeBoth">I like both!</el-button>
-          <el-button @click="goBack">Go back</el-button>
+          <button class="choice" @click="likeBoth">I like both!</button>
+          <button class="choice" @click="goBack">Go back</button>
         </div>
       </div>
 
       <div class="progress-bar">
-        <div class="progress" :style="{ width: progressPercent + '%' }" />
+        <div class="progress" :style="{ width: progressPercent + '%' }"></div>
         <p>{{ currentIndex + 1 }} / {{ totalComparisons }} done</p>
       </div>
     </div>
@@ -37,8 +37,8 @@
       </ul>
 
       <div class="button-wrapper">
-        <el-button @click="goHome">Make another!🏃‍➡️</el-button>
-        <el-button @click="restart">Restart!🔄️</el-button>
+        <button @click="restart">Restart!🔄️</button>
+        <button @click="goHome">Make another!🏃‍➡️</button>
       </div>
     </div>
   </div>
