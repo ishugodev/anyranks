@@ -106,7 +106,9 @@
     }
 
     .button-wrapper {
-      display: flex;
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: 8rem 1fr;
       gap: 1rem;
     }
 

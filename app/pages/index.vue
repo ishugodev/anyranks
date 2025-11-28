@@ -18,16 +18,18 @@
         ref="inputRef"
         v-model="newItem"
         data-test="input-main"
+        class="input-main"
         type="text"
         placeholder="Add item"
         @keyup.enter="addItem"
       />
       <button
         data-test="add-item-button"
+        class="add-item-button"
         aria-label="Add item"
         @click="addItem"
       >
-        +
+        <Icon name="majesticons:plus" />
       </button>
     </div>
 
@@ -40,10 +42,12 @@
         <span>{{ item.text || "\u00A0" }}</span>
         <button
           data-test="remove-item-button"
-          class="danger"
+          class="danger remove-item-button"
           aria-label="Remove item"
           @click="removeItem(index)"
-        ></button>
+        >
+          <Icon name="majesticons:close" />
+        </button>
       </li>
     </ul>
 
@@ -51,7 +55,7 @@
 
     <div class="div-align-center">
       <button v-if="canSort" class="sort-button" @click="startSort">
-        Start sort!🤩
+        Start sorting!🤩
       </button>
     </div>
   </div>
