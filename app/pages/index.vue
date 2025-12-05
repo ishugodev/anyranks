@@ -29,7 +29,7 @@
         aria-label="Add item"
         @click="addItem"
       >
-        <Icon name="majesticons:plus" />
+        <Icon name="mingcute:add-line" />
       </button>
     </div>
 
@@ -46,7 +46,7 @@
           aria-label="Remove item"
           @click="removeItem(index)"
         >
-          <Icon name="majesticons:close" />
+          <Icon name="mingcute:close-line" />
         </button>
       </li>
     </ul>

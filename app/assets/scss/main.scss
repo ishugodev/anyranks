@@ -77,3 +77,8 @@ button:active {
 button.danger:hover {
   background-color: hsl(0, 77%, 59%);
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

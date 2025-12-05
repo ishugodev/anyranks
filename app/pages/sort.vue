@@ -1,23 +1,25 @@
 <template>
   <div class="sort-container">
-    <div v-if="pair" class="sort">
+    <div v-if="!finished" class="sort">
       <strong>Sorting Time!⚡</strong>
       <p>Which one do you prefer?</p>
 
-      <div class="controls">
-        <div class="choices">
-          <button class="choice" @click="choose(pair[0])">
-            {{ pair[0].text }}
-          </button>
-          <span>VS</span>
-          <button class="choice" @click="choose(pair[1])">
-            {{ pair[1].text }}
-          </button>
-        </div>
+      <div v-if="pair">
+        <div class="controls">
+          <div class="choices">
+            <button class="choice" @click="choose(pair[0])">
+              {{ pair[0].text }}
+            </button>
+            <span>VS</span>
+            <button class="choice" @click="choose(pair[1])">
+              {{ pair[1].text }}
+            </button>
+          </div>
 
-        <div class="extra-actions">
-          <button class="choice" @click="likeBoth">I like both!</button>
-          <button class="choice" @click="goBack">Go back</button>
+          <div class="extra-actions">
+            <button class="choice" @click="likeBoth">I like both!</button>
+            <button class="choice" @click="goBack">Go back</button>
+          </div>
         </div>
       </div>
 
@@ -28,18 +30,104 @@
     </div>
 
     <div v-else class="result">
-      <strong>Ranking🏆</strong>
-      <ul>
-        <li v-for="(item, index) in rankedCompetitiveTies" :key="index">
-          <span class="index">{{ item.rank }}º</span>
-          <span class="item">{{ item.text }} ({{ item.score }} pt.)</span>
+      <strong class="result-title">Ranking🏆</strong>
+      <ul class="podium">
+        <li
+          v-for="(item, index) in rankedCompetitiveTies.slice(0, 3)"
+          :key="index"
+          class="podium-item"
+          :class="'pos-' + item.rank"
+        >
+          <img
+            class="podium-image"
+            :src="item?.image || placeholder"
+            alt="item image"
+          />
+          <div class="podium-content">
+            <div class="podium-content-row-1">
+              <div class="podium-rank">{{ item.rank }}º</div>
+              <div class="podium-text">{{ item.text }}</div>
+            </div>
+            <div class="podium-score">{{ item.score }} pts</div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="ranking-list">
+        <li
+          v-for="(item, index) in rankedCompetitiveTies.slice(3)"
+          :key="index"
+          class="rank-card"
+        >
+          <img class="rank-card-image" :src="item?.image || placeholder" />
+          <div class="rank-card-content">
+            <div class="rank-card-content-row-1">
+              <div class="rank-number">{{ item.rank }}º</div>
+              <div class="rank-text">{{ item.text }}</div>
+            </div>
+            <div class="rank-score">{{ item.score }} pts</div>
+          </div>
         </li>
       </ul>
 
       <div class="button-wrapper">
-        <button @click="restart">Restart!🔄️</button>
-        <button @click="goHome">Make another!🏃‍➡️</button>
+        <div class="share-stuff">
+          <button class="button-outline" disabled>
+            <span>Share</span>
+            <Icon class="icon" name="mingcute:share-2-fill" />
+          </button>
+          <button class="button-outline" @click="saveResultImage">
+            <span>Save result image</span>
+            <Icon class="icon" name="mingcute:save-2-line" />
+          </button>
+        </div>
+        <div class="navigation">
+          <button class="button-restart" @click="restart">Restart</button>
+          <button class="button-home" @click="goHome">Make another!</button>
+        </div>
       </div>
+    </div>
+    <!-- invisible wrapper to export -->
+    <div class="export-wrapper">
+      <div id="export-area" class="export-area">
+        <strong class="result-title">Ranking🏆</strong>
+
+        <ul class="podium">
+          <li
+            v-for="(item, index) in rankedCompetitiveTies.slice(0, 3)"
+            :key="index"
+            class="podium-item"
+            :class="'pos-' + item.rank"
+          >
+            <img class="podium-image" :src="item?.image || placeholder" />
+            <div class="podium-content">
+              <div class="podium-content-row-1">
+                <div class="podium-rank">{{ item.rank }}º</div>
+                <div class="podium-text">{{ item.text }}</div>
+              </div>
+              <div class="podium-score">{{ item.score }} pts</div>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="ranking-list">
+          <li
+            v-for="(item, index) in rankedCompetitiveTies.slice(3)"
+            :key="index"
+            class="rank-card"
+          >
+            <img class="rank-card-image" :src="item?.image || placeholder" />
+            <div class="rank-card-content">
+              <div class="rank-card-content-row-1">
+                <div class="rank-number">{{ item.rank }}º</div>
+                <div class="rank-text">{{ item.text }}</div>
+              </div>
+              <div class="rank-score">{{ item.score }} pts</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- -->
     </div>
   </div>
 </template>
@@ -47,6 +135,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 
+import placeholder from "/imgs/placeholder.jpg";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -54,11 +143,12 @@ const router = useRouter();
 interface RankItem {
   text: string;
   score: number;
+  image?: string;
 }
 
 interface StoredData {
   temp_items: { text: string }[];
-  result?: { rank: number; text: string; score: number }[];
+  result?: { rank: number; text: string; score: number; image?: string }[];
 }
 
 const items = ref<RankItem[]>([]);
@@ -80,7 +170,12 @@ const canGoBack = computed(() => history.value.length > 0);
 
 const rankedCompetitiveTies = computed(() => {
   const sorted = [...items.value].sort((a, b) => b.score - a.score);
-  const result: { rank: number; text: string; score: number }[] = [];
+  const result: {
+    rank: number;
+    text: string;
+    score: number;
+    image?: string;
+  }[] = [];
 
   let currentRank = 1;
   let prevScore: number | null = null;
@@ -191,6 +286,42 @@ function restart() {
   if (data.temp_items) {
     data.result = null;
     localStorage.setItem("@anyranks", JSON.stringify(data));
+  }
+}
+
+async function saveResultImage() {
+  try {
+    const area = document.getElementById("export-area");
+    if (!area) return;
+
+    const html2canvas = (await import("html2canvas")).default;
+
+    const canvas = await html2canvas(area, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const dataUrl = canvas.toDataURL("image/png");
+
+    const now = new Date();
+
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+
+    const hh = String(now.getHours()).padStart(2, "0");
+    const mi = String(now.getMinutes()).padStart(2, "0");
+    const ss = String(now.getSeconds()).padStart(2, "0");
+
+    const fileName = `ranking_${yyyy}${mm}${dd}_${hh}${mi}${ss}.png`;
+
+    const link = document.createElement("a");
+    link.download = fileName;
+    link.href = dataUrl;
+    link.click();
+  } catch (err) {
+    console.error("Erro ao salvar imagem:", err);
   }
 }
 </script>

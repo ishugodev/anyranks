@@ -34,6 +34,7 @@
     .choice {
       flex: 1;
       border: 1px solid hsl(0, 0%, 25%);
+      word-break: break-all;
     }
   
     .extra-actions {
@@ -74,53 +75,215 @@
   }
 
   .result {
-    strong {
-      display: block;
-      text-align: center;
-    }
+    display: grid;
+    gap: 0.5rem;
+  }
 
-    ul {
+  .export-wrapper {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    z-index: -1;
+  }
+
+  .export-area {
+    width: 786px;
+    background: #fff;
+    overflow: hidden;
+    padding: 2rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .result-title {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .podium {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    
+    .podium-item {
+      background: #f7f7f7;
+      border-radius: 0.5rem;
       display: grid;
-      gap: 0.5rem;
+      place-content: start;
+      flex: 1;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
 
-      padding: 0;
+      &.pos-1 {
+        background: #ffeaa7;
+        border-color: #e1c25a;
+      }
 
-      font-size: 1.5rem;
+      &.pos-2 {
+        background: #dfe6e9;
+      }
+
+      &.pos-3 {
+        background: #f8d5b7;
+      }
+
+      .podium-image {
+        width: 100%;
+        transform: scale(1.05);
+        object-fit: cover;
+      }
+
+      .podium-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 0.5rem;
+
+        .podium-content-row-1 {
+          display: flex;
+          align-items: start;
+        }
+
+        .podium-rank {
+          width: 17.5%;
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+
+        .podium-text {
+          width: 82.5%;
+          font-size: 1.5rem;
+          font-weight: 700;
+          word-break: break-all;
+        }
+        .podium-score {
+          opacity: .7;
+          font-size: 0.85rem;
+        }
+      }
     }
+  }
 
-    ul li {
+  .ranking-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+
+    .rank-card {
+      background: #f7f7f7;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
 
-      list-style: none;
-
-      .index {
-        width: 1.5rem;
+      .rank-card-image {
+        width: 100%;
+        transform: scale(1.05);
+        object-fit: cover;
       }
 
-      .item {
-        flex: 1;
+      .rank-card-content {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .rank-card-content-row-1 {
+          display: flex;
+          align-items: start;
+        }
+
+        .rank-number {
+          width: 17.5%;
+          font-weight: 700;
+        }
+
+        .rank-text {
+          width: 82.5%;
+          font-weight: 600;
+          font-size: .9rem;
+          word-break: break-all;
+        }
+
+        .rank-score {
+          opacity: .7;
+          font-size: .8rem;
+        }
       }
     }
+  }
 
-    .button-wrapper {
+  .button-wrapper {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    
+    .navigation {
       display: grid;
-      grid-auto-flow: column;
-      grid-template-columns: 8rem 1fr;
+      gap: 1rem;
+    }
+
+    .share-stuff {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
 
     button {
-      font-size: 1.25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 1rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-      padding: 2rem;
-      margin: 0;
+    .button-home {
+      background: #4c6ef5;
+      color: #fff;
 
-      flex: 1;
-  
-      border-radius: 1rem;
+      &:hover {
+        background: #3b5bdb;
+      }
+    }
+
+    .button-restart {
+      background: #7e7e7e;
+      color: #fff;
+
+      &:hover {
+        background: #6d6d6d;
+      }
+    }
+
+    .button-outline {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+
+      background: transparent;
+      border: 2px solid #dcdcdc;
+      color: #333;
+
+      &:hover {
+        background: #f8f9fa;
+      }
+
+      .icon {
+        font-size: 1.25rem;
+      }
     }
   }
 }
