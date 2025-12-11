@@ -324,4 +324,18 @@ async function saveResultImage() {
     console.error("Erro ao salvar imagem:", err);
   }
 }
+
+defineExpose({
+  items,
+  currentIndex,
+  comparisons,
+  history,
+  finished,
+  placeholder,
+  choose,
+  likeBoth,
+  goBack,
+  finishRanking,
+  restart,
+});
 </script>
