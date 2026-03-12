@@ -8,11 +8,13 @@
         <div class="controls">
           <div class="choices">
             <button class="choice" @click="choose(pair[0])">
-              {{ pair[0].text }}
+              <img v-if="withImage" :src="pair[0].image" alt="" />
+              {{ pair[0].title }}
             </button>
             <span>VS</span>
             <button class="choice" @click="choose(pair[1])">
-              {{ pair[1].text }}
+              <img v-if="withImage" :src="pair[1].image" alt="" />
+              {{ pair[1].title }}
             </button>
           </div>
 
@@ -39,6 +41,7 @@
           :class="'pos-' + item.rank"
         >
           <img
+            v-if="withImage"
             class="podium-image"
             :src="item?.image || placeholder"
             alt="item image"
@@ -46,7 +49,7 @@
           <div class="podium-content">
             <div class="podium-content-row-1">
               <div class="podium-rank">{{ item.rank }}º</div>
-              <div class="podium-text">{{ item.text }}</div>
+              <div class="podium-text">{{ item.title }}</div>
             </div>
             <div class="podium-score">{{ item.score }} pts</div>
           </div>
@@ -59,11 +62,11 @@
           :key="index"
           class="rank-card"
         >
-          <img class="rank-card-image" :src="item?.image || placeholder" />
+          <img v-if="withImage" class="rank-card-image" :src="item?.image || placeholder" />
           <div class="rank-card-content">
             <div class="rank-card-content-row-1">
               <div class="rank-number">{{ item.rank }}º</div>
-              <div class="rank-text">{{ item.text }}</div>
+              <div class="rank-text">{{ item.title }}</div>
             </div>
             <div class="rank-score">{{ item.score }} pts</div>
           </div>
@@ -71,16 +74,10 @@
       </ul>
 
       <div class="button-wrapper">
-        <div class="share-stuff">
-          <button class="button-outline" disabled>
-            <span>Share</span>
-            <Icon class="icon" name="mingcute:share-2-fill" />
-          </button>
           <button class="button-outline" @click="saveResultImage">
             <span>Save result image</span>
             <Icon class="icon" name="mingcute:save-2-line" />
           </button>
-        </div>
         <div class="navigation">
           <button class="button-restart" @click="restart">Restart</button>
           <button class="button-home" @click="goHome">Make another!</button>
@@ -99,11 +96,11 @@
             class="podium-item"
             :class="'pos-' + item.rank"
           >
-            <img class="podium-image" :src="item?.image || placeholder" />
+            <img v-if="withImage" class="podium-image" :src="item?.image || placeholder" />
             <div class="podium-content">
               <div class="podium-content-row-1">
                 <div class="podium-rank">{{ item.rank }}º</div>
-                <div class="podium-text">{{ item.text }}</div>
+                <div class="podium-text">{{ item.title }}</div>
               </div>
               <div class="podium-score">{{ item.score }} pts</div>
             </div>
@@ -116,11 +113,11 @@
             :key="index"
             class="rank-card"
           >
-            <img class="rank-card-image" :src="item?.image || placeholder" />
+            <img v-if="withImage" class="rank-card-image" :src="item?.image || placeholder" />
             <div class="rank-card-content">
               <div class="rank-card-content-row-1">
                 <div class="rank-number">{{ item.rank }}º</div>
-                <div class="rank-text">{{ item.text }}</div>
+                <div class="rank-text">{{ item.title }}</div>
               </div>
               <div class="rank-score">{{ item.score }} pts</div>
             </div>
@@ -141,14 +138,14 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 interface RankItem {
-  text: string;
+  title: string;
   score: number;
   image?: string;
 }
 
 interface StoredData {
-  temp_items: { text: string }[];
-  result?: { rank: number; text: string; score: number; image?: string }[];
+  temp_items: { title: string, image?: string }[];
+  result?: { rank: number; title: string; score: number; image?: string }[];
 }
 
 const items = ref<RankItem[]>([]);
@@ -172,7 +169,7 @@ const rankedCompetitiveTies = computed(() => {
   const sorted = [...items.value].sort((a, b) => b.score - a.score);
   const result: {
     rank: number;
-    text: string;
+    title: string;
     score: number;
     image?: string;
   }[] = [];
@@ -190,8 +187,9 @@ const rankedCompetitiveTies = computed(() => {
 
     result.push({
       rank: currentRank,
-      text: current.text,
+      title: current.title,
       score: current.score,
+      image: current.image || undefined
     });
 
     prevScore = current.score;
@@ -200,17 +198,23 @@ const rankedCompetitiveTies = computed(() => {
   return result;
 });
 
+const withImage = ref(true);
+
 onMounted(() => {
   try {
+    console.log(pair)
     const stored = localStorage.getItem("@anyranks");
     if (!stored) return router.push("/");
+
+    withImage.value = JSON.parse(stored).withImage;
 
     const data: StoredData = JSON.parse(stored);
     if (!data.temp_items || !data.temp_items.length) return router.push("/");
 
     items.value = data.temp_items.map((index) => ({
-      text: index.text,
+      title: index.title,
       score: 0,
+      image: index.image || undefined
     }));
 
     comparisons.value = generateComparisons(items.value);

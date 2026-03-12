@@ -35,26 +35,15 @@ describe("Home page", () => {
     expect(wrapper.text()).toContain("No list yet");
   });
 
-  it("Add item with Enter", async () => {
+  it("adds item to list", async () => {
     const wrapper = await mountSuspended(Home);
 
     const input = wrapper.find('[data-test="input-main"]');
     await input.setValue("Naruto");
-    await input.trigger("keyup.enter");
+
+    await wrapper.find("form").trigger("submit");
 
     expect(wrapper.text()).toContain("Naruto");
-  });
-
-  it("Add item with button", async () => {
-    const wrapper = await mountSuspended(Home);
-
-    const input = wrapper.find('[data-test="input-main"]');
-    await input.setValue("Goku");
-
-    const button = wrapper.find('[data-test="add-item-button"]');
-    await button.trigger("click");
-
-    expect(wrapper.text()).toContain("Goku");
   });
 
   it("Block duplicate item", async () => {
@@ -62,10 +51,11 @@ describe("Home page", () => {
 
     const input = wrapper.find('[data-test="input-main"]');
     await input.setValue("Luffy");
-    await input.trigger("keyup.enter");
+    await wrapper.find("form").trigger("submit");
 
     await input.setValue("Luffy");
-    await input.trigger("keyup.enter");
+    const form = wrapper.find("form");
+    await form.trigger("submit");
 
     expect(wrapper.text()).toContain("Same name");
     expect(wrapper.findAll("li").length).toBe(1);
@@ -74,9 +64,9 @@ describe("Home page", () => {
   it("Remove item", async () => {
     const wrapper = await mountSuspended(Home);
 
-    const input = wrapper.find("input");
+    const input = wrapper.find('[data-test="input-main"]')
     await input.setValue("Ichigo");
-    await input.trigger("keyup.enter");
+    await wrapper.find("form").trigger("submit");
 
     const removeButton = wrapper.find('[data-test="remove-item-button"]');
     await removeButton.trigger("click");
@@ -90,9 +80,9 @@ describe("Home page", () => {
 
     const input = wrapper.find('[data-test="input-main"]');
     await input.setValue("Saitama");
-    await input.trigger("keyup.enter");
+    await wrapper.find("form").trigger("submit");
     await input.setValue("Genos");
-    await input.trigger("keyup.enter");
+    await wrapper.find("form").trigger("submit");
 
     const sortButton = wrapper.find(".sort-button");
     await sortButton.trigger("click");

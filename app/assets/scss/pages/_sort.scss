@@ -10,7 +10,7 @@
       color: hsl(0, 0%, 5%);
       background-color: transparent;
   
-      padding: 2rem;
+      padding: 1rem;
   
       border-radius: 1rem;
     }
@@ -32,9 +32,18 @@
     }
   
     .choice {
+      display: grid;
+      gap: 1rem;
       flex: 1;
       border: 1px solid hsl(0, 0%, 25%);
       word-break: break-all;
+
+      img {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
     }
   
     .extra-actions {
@@ -145,17 +154,15 @@
 
         .podium-content-row-1 {
           display: flex;
-          align-items: start;
+          gap: 0.5rem;
         }
 
         .podium-rank {
-          width: 17.5%;
           font-size: 1.5rem;
           font-weight: 700;
         }
 
         .podium-text {
-          width: 82.5%;
           font-size: 1.5rem;
           font-weight: 700;
           word-break: break-all;
@@ -228,12 +235,6 @@
     
     .navigation {
       display: grid;
-      gap: 1rem;
-    }
-
-    .share-stuff {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
 
